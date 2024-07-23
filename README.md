@@ -40,5 +40,42 @@
     Software de desarrollo:
         Descripción: Herramientas utilizadas para crear y mantener software.
         Ejemplos: IDEs (Integrated Development Environments) como Visual Studio, Eclipse; lenguajes de programación como Python, Java.
+## Componentes Principales
+- **CPU**: Unidad Central de Procesamiento
+- **RAM**: Memoria de Acceso Aleatorio
+- **Disco Duro / SSD**
+- **Placa base**
+- **GPU**: Unidad de Procesamiento Gráfico
+- **Fuente de alimentación**
 
+# Interacción Hardware y Software
+- **Hardware**: Infraestructura física
+- **Software**: Instrucciones y programas
+- - Controladores
+- - Sistema Operativo
+- - Aplicaciones
 
+# CPU y Sus Partes
+- **CPU**: Ejecuta instrucciones y procesa datos
+- - Unidad de Control
+- - Unidad Aritmético-Lógica (ALU)
+- - Registros
+- - Unidad de Punto Flotante (FPU)
+
+# Velocidad de la CPU
+- **Velocidad del reloj**
+- - Medida en Hertzios (Hz)
+- - Determina la rapidez de procesamiento
+
+# Secuencia de Arranque
+1. **Encendido**
+2. **POST (Power-On Self Test)**
+3. **BIOS/UEFI**
+4. **Carga del cargador de arranque**
+5. **Carga del sistema operativo**
+6. **Inicialización del sistema operativo**
+7. **Listo para usar**
+
+# Descubrimiento Personal
+- Importancia y complejidad de la interacción entre componentes
+- Proceso detallado desde el encendido hasta el inicio del sistema operativo
