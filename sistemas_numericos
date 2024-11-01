@@ -1,0 +1,178 @@
+1) 
+Diagrama de bloques del sistema.
+
+    1) Módulo de Sensores
+
+        Entradas: Datos de los sensores de velocidad, altitud, y temperatura en formato binario.
+        Salidas: Datos de cada sensor en binario (10 bits para velocidad y altitud, 12 bits para temperatura).
+
+    2) Módulo de Codificación Sensores
+
+        Entradas: Datos binarios de los sensores.
+        Procesamiento: Identificación del sensor (2 bits), datos del sensor, y bit de paridad.
+        Salidas: Paquete de datos codificados con identificador del sensor y bit de paridad.
+
+    3)Módulo de Decodificación
+
+        Entradas: Datos codificados.
+        Procesamiento: Decodificación de la identificación del sensor y verificación del bit de paridad.
+        Salidas: Datos binarios de los sensores con error de transmisión validado.
+
+    4) Módulo de Conversión Bin2Dec
+
+        Entradas: Datos binarios de cada sensor.
+        Procesamiento: Conversión de binario a decimal y hexadecimal.
+        Salidas: Datos en decimal y hexadecimal.
+
+    5) Módulo de Cálculo de Error
+
+        Entradas: Valores de los sensores y valores de set point.
+        Procesamiento: Cálculo del error (Error = Valor Medido - SetPoint).
+        Salidas: Error de cada variable en decimal.
+
+    6) Módulo de Conversión Dec2Bin
+
+        Entradas: Valores de error en decimal.
+        Procesamiento: Conversión de error a binario.
+        Salidas: Error en binario.
+
+    7) Módulo de Control
+
+        Entradas: Error en binario.
+        Procesamiento: Aplicación de control proporcional (Control = Error * K_P).
+        Salidas: Señal de control en binario.
+
+    8) Módulo de Codificación de la CPU
+
+        Entradas: Señal de control en binario.
+        Salidas: Datos binarios para el módulo de acción de control.
+
+
+
+2) 
+Casos de aplicacion.
+
+    Caso 1)
+
+        Velocidad: 450 mph (en binario: 0111000010)
+        Altitud: 35,000 pies (en binario: 1000010010)
+        Temperatura: 100 °C (en binario: 011001000000)
+
+        Codificación:
+
+            Añade un identificador de sensor y bit de paridad para cada dato:
+            Velocidad: 00 0111000010 P
+            Altitud: 01 1000010010 P
+            Temperatura: 10 011001000000 P
+
+        Conversión Bin2Dec:
+
+            Convierte cada dato de binario a decimal y hexadecimal:
+            Velocidad: 450 (Decimal), 0x1C2 (Hexadecimal)
+            Altitud: 35,000 (Decimal), 0x88A (Hexadecimal)
+            Temperatura: 100 (Decimal), 0x640 (Hexadecimal)
+
+        Cálculo de Error:
+
+            Asigna set points y calcula el error:
+            Velocidad: Set point = 400, Error = 450 − 400 = 50
+            Altitud: Set point = 30,000, Error = 35,000 - 30,000 = 5000
+            Temperatura: Set point = 90, Error = 100 - 90 = 10
+
+        Conversión Dec2Bin:
+
+            Convierte los errores a binario:
+            Velocidad: 00110010
+            Altitud: 1001110001000
+            Temperatura: 00001010
+
+        Control Proporcional:
+
+            Aplica un factor proporcional Kp = 1.5 para cada error:
+            Velocidad:  50 × 1.5=75
+            Altitud: 5000 × 1.5=7500
+            Temperatura: 10 × 1.5=15
+
+
+    Caso 2)
+
+        Velocidad: 200 mph (en binario: 0011001000)
+        Altitud: 10,000 pies (en binario: 0010010000)
+        Temperatura: 25 °C (en binario: 000110010100)
+
+        Codificación:
+
+            Velocidad: 00 0011001000 P
+            Altitud: 01 0010010000 P
+            Temperatura: 10 000110010100 P
+
+        Conversión Bin2Dec:
+
+            Velocidad: 200 (Decimal), 0xC8 (Hexadecimal)
+            Altitud: 10,000 (Decimal), 0x2710 (Hexadecimal)
+            Temperatura: 25 (Decimal), 0x19 (Hexadecimal)
+
+        Cálculo de Error:
+
+            Velocidad: Set point = 250, Error = 200−250=−50
+            Altitud: Set point = 15,000, Error = 10,000−15,000=−5000
+            Temperatura: Set point = 30, Error = 25−30=−5
+        
+        Conversión Dec2Bin:
+
+            Velocidad: 11110011 
+            Altitud: 1110000111000 
+            Temperatura: 11111011
+
+        Control Proporcional:
+
+            Velocidad: −50×1.5=−75
+            Altitud: −5000×1.5=−7500
+            Temperatura: −5×1.5=−7.5
+
+
+    Caso 3)
+
+        Velocidad: 550 mph (en binario: 1000100110)
+        Altitud: 15,000 pies (en binario: 0011101011)
+        Temperatura: 120 °C (en binario: 011110100000)
+
+        Codificación:
+
+            Velocidad: 00 1000100110 P
+            Altitud: 01 0011101011 P
+            Temperatura: 10 011110100000 P
+
+        Conversión Bin2Dec:
+
+            Velocidad: 550 (Decimal), 0x226 (Hexadecimal)
+            Altitud: 15,000 (Decimal), 0x3A98 (Hexadecimal)
+            Temperatura: 120 (Decimal), 0x780 (Hexadecimal)
+
+        Cálculo de Error:
+
+            Velocidad: Set point = 500, Error = 550−500=50
+            Altitud: Set point = 10,000, Error = 15,000−10,000=5000
+            Temperatura: Set point = 110, Error = 120−110=10
+
+        Conversión Dec2Bin:
+
+            Velocidad: 00110010
+            Altitud: 1001110001000
+            Temperatura: 00001010
+
+        Control Proporcional:
+
+            Velocidad: 50×1.5=75
+            Altitud: 5000×1.5=7500
+            Temperatura: 10×1.5=15
+
+
+
+3)
+Conclusiones de la actividad.
+
+    El diseño del sistema de control de variables de la aeronave permite una comunicación eficiente y reduce errores en la transmisión mediante un proceso de codificación y decodificación. La estructura organizada facilita tanto el análisis como el control de cada módulo, haciendo posible verificar y modificar partes específicas del sistema de manera rapida. Además, la diversidad del diseño lo hace adaptable a distintos tipos de sensores y variables, lo que resulta ideal para aplicaciones en sistemas de control complejos. Los casos de aplicación realizados muestran la precisión en la transmisión de datos y en la implementación de controles, asegurando un rendimiento confiable bajo diferentes condiciones de operación.
+
+
+
